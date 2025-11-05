@@ -1,282 +1,73 @@
-# Dart Scan Project
-
-A comprehensive Dart project designed for security scanning and vulnerability detection. This project demonstrates various Dart/Flutter development patterns and includes extensive security utilities, data models, and services that are ideal for security analysis tools like Snyk.
-
-## Features
-
-- **Security Utilities**: Comprehensive security validation, input sanitization, and cryptographic functions
-- **Data Models**: Strongly typed models with JSON serialization
-- **API Services**: HTTP client with authentication, error handling, and security features
-- **Database Services**: SQLite integration with proper schema management
-- **Authentication Services**: User management, password hashing, and session handling
-- **File Operations**: Safe file handling with security validations
-- **Cryptographic Functions**: Various encryption, hashing, and secure random generation utilities
-- **Comprehensive Testing**: Unit tests covering all major components
-- **Code Analysis**: Configured for static analysis and linting
-
-## Project Structure
-
-```
-lib/
-├── dart_scan_project.dart          # Main library entry point
-└── src/
-    ├── models/                     # Data models
-    │   ├── user.dart
-    │   └── product.dart
-    ├── services/                   # Business logic services
-    │   ├── api_service.dart
-    │   ├── database_service.dart
-    │   └── auth_service.dart
-    └── utils/                      # Utility functions
-        ├── security_utils.dart
-        ├── file_utils.dart
-        └── crypto_utils.dart
-
-test/                               # Unit tests
-├── dart_scan_project_test.dart
-├── product_model_test.dart
-└── file_utils_test.dart
-
-pubspec.yaml                        # Dependencies and project configuration
-analysis_options.yaml               # Code analysis configuration
-.gitignore                         # Git ignore patterns
-README.md                          # This file
-```
-
-## Dependencies
-
-This project includes a comprehensive set of dependencies that are commonly analyzed by security scanning tools:
-
-### Core Dependencies
-- **http**: HTTP client for API communications
-- **dio**: Alternative HTTP client with advanced features
-- **crypto**: Cryptographic functions and utilities
-- **sqflite**: SQLite database for local storage
-- **shared_preferences**: Local key-value storage
-- **path_provider**: File system path utilities
-- **uuid**: Universal unique identifier generation
-- **logger**: Logging framework
-
-### Security & Authentication
-- **pointycastle**: Cryptographic primitives
-- **local_auth**: Local authentication (biometrics)
-- **firebase_auth**: Firebase authentication integration
-
-### UI & State Management (Flutter)
-- **provider**: State management
-- **bloc**: Business logic component
-- **flutter_riverpod**: Reactive state management
-
-### Development & Testing
-- **test**: Unit testing framework
-- **mockito**: Mocking framework for tests
-- **build_runner**: Code generation
-- **json_serializable**: JSON serialization
-- **flutter_lints**: Code linting rules
-
-## Security Features
-
-### Input Validation
-- Email format validation
-- URL security validation
-- Input sanitization against XSS attacks
-- File type validation
-- Filename sanitization
-
-### Authentication & Authorization
-- Password strength validation
-- Secure password hashing (SHA-256)
-- Session management
-- Token-based authentication
-- Rate limiting protection
-
-### Data Protection
-- Sensitive data masking
-- HMAC signature generation and verification
-- Base64 encoding/decoding
-- Secure random number generation
-- File content validation
-
-### Cryptographic Utilities
-- Multiple hashing algorithms (MD5, SHA-1, SHA-256)
-- HMAC implementations
-- Secure random byte generation
-- Password-based key derivation
-- Entropy calculation
+# Vulnerable Dart Application
 
-## Usage
+This is a deliberately vulnerable Dart application created for security testing and educational purposes. It contains various security vulnerabilities that should never be used in production environments.
 
-### Basic Usage
+## Vulnerabilities Included
 
-```dart
-import 'package:dart_scan_project/dart_scan_project.dart';
+1. **Cross-Site Scripting (XSS)**
+   - Endpoint: `GET /xss?name=<script>alert(1)</script>`
+   - Description: User input is directly embedded in HTML without proper escaping
 
-// Initialize the application
-final app = DartScanApp();
-await app.initialize();
+2. **SQL Injection**
+   - Endpoint: `GET /search?username=admin' OR '1'='1`
+   - Description: Direct string interpolation in SQL queries allows SQL injection
 
-// Create and process a user
-final user = User(
-  id: 'user-123',
-  name: 'John Doe',
-  email: 'john@example.com',
-  age: 30,
-);
+3. **Path Traversal**
+   - Endpoint: `GET /file?file=../../etc/passwd`
+   - Description: Unvalidated user input used in file operations
 
-await app.processUserData(user);
+4. **Hardcoded Secrets**
+   - Database credentials and API keys hardcoded in the source code
+   - Found in `main.dart`
 
-// Generate secure tokens
-final token = app.generateSecureToken();
-print('Generated token: $token');
+5. **Insecure Direct Object Reference (IDOR)**
+   - Endpoint: `GET /data?user_id=1`
+   - Description: Direct access to resources without proper authorization checks
 
-// Get application information
-final info = app.getAppInfo();
-print('App: ${info['name']} v${info['version']}');
+6. **Insecure Storage**
+   - Plain text password storage in memory
+   - Found in the `users` map in `main.dart`
 
-// Clean up
-app.dispose();
-```
+## Setup Instructions
 
-### Security Utilities
+1. Install Dart SDK (if not already installed)
+2. Install dependencies:
+   ```bash
+   dart pub get
+   ```
+3. Run the application:
+   ```bash
+   dart run bin/main.dart
+   ```
+4. The server will start on `http://localhost:8080`
 
-```dart
-import 'package:dart_scan_project/src/utils/security_utils.dart';
+## Security Warning
 
-// Validate input
-final isValid = SecurityUtils.isValidInput(userInput);
-final isValidEmail = 'user@example.com'.isValidEmail;
+⚠️ **WARNING** ⚠️
 
-// Sanitize data
-final sanitized = SecurityUtils.sanitizeUserData(userData);
+This application contains intentional security vulnerabilities. Do not deploy this application to any publicly accessible server. This is for testing and educational purposes only.
 
-// Check password strength
-final strength = SecurityUtils.checkPasswordStrength(password);
+## Testing the Vulnerabilities
 
-// Generate secure random data
-final randomString = SecurityUtils.generateSecureRandomString(32);
-```
+### XSS Test
+Visit: `http://localhost:8080/xss?name=<script>alert('XSS')</script>`
 
-### File Operations
+### SQL Injection Test
+Visit: `http://localhost:8080/search?username=admin' OR '1'='1`
 
-```dart
-import 'package:dart_scan_project/src/utils/file_utils.dart';
+### Path Traversal Test
+Visit: `http://localhost:8080/file?file=../../etc/passwd`
 
-// Safe file operations
-await FileUtils.writeFileSafely('path/to/file.txt', 'content');
-final content = await FileUtils.readFileSafely('path/to/file.txt');
+### IDOR Test
+Visit: `http://localhost:8080/data?user_id=1`
 
-// File information
-final info = await FileUtils.getFileInfo('path/to/file.txt');
-print('File size: ${info.size} bytes');
+## Secure Coding Practices
 
-// File type detection
-final type = await FileUtils.detectFileType('path/to/file.txt');
-```
+For each vulnerability in this application, consider these secure alternatives:
 
-### Cryptographic Functions
-
-```dart
-import 'package:dart_scan_project/src/utils/crypto_utils.dart';
-
-// Hashing
-final hash = CryptoUtils.hashString('sensitive data');
-
-// HMAC
-final signature = CryptoUtils.generateHMAC(data, key);
-final isValid = CryptoUtils.verifyHMAC(data, key, signature);
-
-// Secure random generation
-final randomBytes = CryptoUtils.generateRandomBytes(32);
-final randomString = CryptoUtils.generateSecureRandomString(64);
-```
-
-## Testing
-
-Run the comprehensive test suite:
-
-```bash
-# Run all tests
-dart test
-
-# Run tests with coverage
-dart test --coverage=coverage
-
-# Run specific test file
-dart test test/dart_scan_project_test.dart
-
-# Run tests with specific patterns
-dart test -n "SecurityUtils"
-```
-
-## Security Scanning
-
-This project is specifically designed for security scanning tools like Snyk. It includes:
-
-1. **Comprehensive Dependencies**: Wide range of packages with various security implications
-2. **Security Patterns**: Demonstrates secure coding practices and common vulnerabilities
-3. **Input Validation**: Multiple layers of input sanitization and validation
-4. **Error Handling**: Proper exception handling and logging
-5. **Code Quality**: Configured for static analysis and linting
-
-### Snyk Configuration
-
-The project includes security-focused configurations:
-
-- **pubspec.yaml**: Comprehensive dependency list for vulnerability scanning
-- **analysis_options.yaml**: Strict code analysis rules
-- **Security Utilities**: Built-in security validation functions
-
-## Configuration
-
-### Code Analysis
-
-The project uses strict analysis options defined in `analysis_options.yaml`:
-
-```yaml
-analyzer:
-  strong-mode: true
-  errors:
-    unused_element: error
-    unused_import: error
-    unused_local_variable: error
-
-linter:
-  rules:
-    - avoid_empty_else
-    - avoid_relative_lib_imports
-    - prefer_const_constructors
-    - prefer_final_fields
-    - prefer_single_quotes
-    - unnecessary_brace_in_string_interps
-```
-
-### Dependencies
-
-All dependencies are pinned to specific versions in `pubspec.yaml` to ensure reproducible builds and accurate security scanning.
-
-## Contributing
-
-1. Follow the existing code style and patterns
-2. Add comprehensive tests for new features
-3. Update documentation as needed
-4. Ensure all tests pass before submitting changes
-5. Follow security best practices
-
-## License
-
-This project is for educational and security scanning demonstration purposes.
-
-## Security Considerations
-
-This project demonstrates various security concepts but should not be used in production without proper security review:
-
-- Password hashing uses SHA-256 (consider using bcrypt/scrypt for production)
-- Simple XOR encryption is for educational purposes only
-- File operations include security validations but may need additional hardening
-- API implementations include basic security but require production hardening
-
-For production use, consider:
-- Using established security libraries
-- Implementing proper encryption algorithms
-- Adding comprehensive security audits
-- Following security best practices for your specific use case
+1. **XSS Protection**: Use HTML escaping libraries or templating engines that auto-escape by default
+2. **SQL Injection**: Use parameterized queries or ORM libraries
+3. **Path Traversal**: Validate and sanitize file paths, use `path.normalize()`
+4. **Secrets Management**: Use environment variables or secret management services
+5. **Authentication**: Implement proper session management and authorization checks
+6. **Password Storage**: Use strong hashing algorithms like Argon2, bcrypt, or PBKDF2

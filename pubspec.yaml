@@ -1,89 +1,17 @@
-name: dart_scan_project
-description: A comprehensive Dart project for security scanning and vulnerability detection
+name: vulnerable_dart_app
+description: A Dart application with intentional security vulnerabilities for testing
 version: 1.0.0
-publish_to: none
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  # HTTP and networking libraries - common security concern areas
-  http: ^1.2.1
-  dio: ^5.4.0
-  flutter:
-    sdk: flutter
-
-  # Database and storage
-  sqflite: ^2.3.0
-  shared_preferences: ^2.2.2
-
-  # Security-related packages
-  crypto: ^3.0.3
-  pointycastle: ^3.7.3
-
-  # JSON and serialization
-  json_annotation: ^4.8.1
-
-  # State management
-  provider: ^6.1.1
-  bloc: ^8.1.2
-  flutter_riverpod: ^2.4.9
-
-  # UI and widgets
-  cached_network_image: ^3.3.0
-
-  # Development and testing utilities
-  logger: ^2.0.2+1
-  uuid: ^4.2.1
-
-  # File handling
-  path_provider: ^2.1.1
-  file_picker: ^6.1.1
-
-  # Image processing
-  image: ^4.1.3
-
-  # Authentication and security
-  firebase_auth: ^4.15.0
-  local_auth: ^2.1.6
-
-  # Web and connectivity
-  connectivity_plus: ^5.0.2
-  url_launcher: ^6.2.2
-
-  # Analytics and monitoring
-  firebase_analytics: ^10.7.3
-
-  # Development dependencies
-  lint: ^2.3.0
+  shelf: ^1.4.0
+  shelf_router: ^1.1.0
+  shelf_static: ^1.1.0
+  postgres: ^2.3.0
+  dotenv: ^3.0.0
+  path: ^1.8.0
 
 dev_dependencies:
-  # Testing frameworks
-  test: ^1.24.9
-  mockito: ^5.4.4
-  flutter_test:
-    sdk: flutter
-
-  # Code generation
-  build_runner: ^2.4.7
-  json_serializable: ^6.7.1
-
-  # Linting and analysis
-  flutter_lints: ^3.0.1
-  dart_code_metrics: ^5.7.6
-
-  # Coverage
-  coverage: ^1.6.3
-
-flutter:
-  uses-material-design: true
-  assets:
-    - assets/images/
-    - assets/config/
-
-  fonts:
-    - family: Inter
-      fonts:
-        - asset: fonts/Inter-Regular.ttf
-        - asset: fonts/Inter-Bold.ttf
-          weight: 700
+  test: ^1.24.0
