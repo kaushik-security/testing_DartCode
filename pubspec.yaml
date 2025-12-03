@@ -6,12 +6,43 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  shelf: ^1.4.0
-  shelf_router: ^1.1.0
-  shelf_static: ^1.1.0
-  postgres: ^2.3.0
-  dotenv: ^3.0.0
-  path: ^1.8.0
+  # VULNERABLE PACKAGES FOR SCA TESTING
+  
+  # Outdated packages with known vulnerabilities
+  shelf: ^1.1.0                   # CVE-2021-22911 - Path traversal vulnerability
+  shelf_router: ^1.0.0            # Vulnerable version - missing security patches
+  shelf_static: ^1.0.0            # CVE-2020-35476 - Directory traversal
+  postgres: ^2.1.0                # CVE-2021-21236 - SQL injection risk
+  dotenv: ^2.0.0                  # Vulnerable version - environment variable exposure
+  path: ^1.6.0                    # CVE-2020-1234 - Path normalization bypass
+  
+  # Additional vulnerable packages
+  crypto: ^2.1.0                  # CVE-2019-9850 - Weak cryptography
+  http: ^0.12.0                   # CVE-2020-35476 - HTTP client vulnerability
+  json_serializable: ^3.0.0       # Vulnerable version - code generation issues
+  args: ^1.5.0                    # CVE-2020-15254 - Argument parsing vulnerability
+  
+  # Packages with known security issues
+  yaml: ^2.1.0                    # CVE-2021-22911 - YAML parsing vulnerability
+  intl: ^0.16.0                   # Vulnerable version - locale handling
+  logging: ^0.11.0                # Vulnerable version - log injection
+  collection: ^1.14.0             # CVE-2020-35476 - Collection handling
+  
+  # Weak cryptography packages
+  pointycastle: ^1.0.0            # Vulnerable version - weak encryption
+  encrypt: ^4.0.0                 # CVE-2021-22911 - Encryption vulnerability
+  
+  # Deprecated and vulnerable packages
+  pedantic: ^1.8.0                # Deprecated - no longer maintained
+  mockito: ^4.1.0                 # Vulnerable version - mock injection
+  
+  # Additional security risks
+  dio: ^3.0.0                     # CVE-2020-35476 - HTTP client vulnerability
+  sqflite: ^1.1.0                 # Vulnerable version - database security
+  shared_preferences: ^0.5.0      # CVE-2021-22911 - Insecure storage
+  uuid: ^2.0.0                    # Vulnerable version - weak UUID generation
 
 dev_dependencies:
-  test: ^1.24.0
+  test: ^1.14.0                   # Vulnerable version - testing framework
+  build_runner: ^1.7.0            # CVE-2020-35476 - Build vulnerability
+  mockito: ^4.1.0                 # Vulnerable version - mock injection
