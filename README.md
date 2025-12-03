@@ -1,6 +1,6 @@
 # Advanced Vulnerable Dart Application
 
-This is a deliberately vulnerable Dart application created for advanced security testing and educational purposes. It contains **30+ security vulnerabilities** spanning multiple categories including injection attacks, cryptographic failures, PII exposure, authentication bypass, and more.
+This is a deliberately vulnerable Dart application created for advanced security testing and educational purposes. It contains **40+ security vulnerabilities** spanning multiple categories including injection attacks, cryptographic failures, PII exposure, authentication bypass, and more.
 
 ## ⚠️ CRITICAL SECURITY WARNING ⚠️
 
