@@ -8,36 +8,36 @@ This is a deliberately vulnerable Dart application created for advanced security
 
 ## Comprehensive Vulnerability List
 
-## 1. Hardcoded Secrets & Credentials
-## 2. PII Data Exposure
-## 3. SQL Injection
-## 4. Cross-Site Scripting (XSS)
-## 5. Insecure Direct Object Reference (IDOR)
-## 6. Path Traversal
-## 7. Weak Cryptography
-## 8. Broken Authentication
-## 9. Insecure Session Management
-## 10. Information Disclosure
-## 11. Command Injection
-## 12. Insecure API Implementation
-## 13. Weak Password Reset
-## 14. Insecure Payment Processing
-## 15. LDAP Injection
-## 16. XXE (XML External Entity)
-## 17. NoSQL Injection
-## 18. Template Injection
-## 19. Expression Language Injection
-## 20. Code Injection / Eval
-## 21. Zip Slip Vulnerability
-## 22. Insecure File Upload
-## 23. Directory Listing
-## 24. Insecure Deserialization
-## 25. Missing Access Control
-## 26. Sensitive Data in Logs
-## 27. Insecure Direct Communication
-## 28. Weak CORS Configuration
-## 29. Debug Mode Enabled
-## 30. Insufficient Logging & Monitoring
+1. Hardcoded Secrets & Credentials
+2. PII Data Exposure
+3. SQL Injection
+4. Cross-Site Scripting (XSS)
+5. Insecure Direct Object Reference (IDOR)
+6. Path Traversal
+7. Weak Cryptography
+8. Broken Authentication
+9. Insecure Session Management
+10. Information Disclosure
+11. Command Injection
+12. Insecure API Implementation
+13. Weak Password Reset
+14. Insecure Payment Processing
+15. LDAP Injection
+16. XXE (XML External Entity)
+17. NoSQL Injection
+18. Template Injection
+19. Expression Language Injection
+20. Code Injection / Eval
+21. Zip Slip Vulnerability
+22. Insecure File Upload
+23. Directory Listing
+24. Insecure Deserialization
+25. Missing Access Control
+26. Sensitive Data in Logs
+27. Insecure Direct Communication
+28. Weak CORS Configuration
+29. Debug Mode Enabled
+30. Insufficient Logging & Monitoring
 
 ## Setup Instructions
 
